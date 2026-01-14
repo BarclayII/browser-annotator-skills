@@ -31,6 +31,9 @@ Use `mcp__claude-in-chrome__javascript_tool` to inject the annotation interface:
 **JavaScript code:**
 ```javascript
 (() => {
+  // Reset the done flag for a new annotation session
+  window.__annotationsDone = false;
+
   if (document.getElementById('annotation-overlay')) {
     return 'Annotation overlay already exists';
   }

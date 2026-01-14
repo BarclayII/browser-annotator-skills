@@ -21,6 +21,9 @@ Use `mcp__playwright__browser_evaluate` to inject this JavaScript:
 
 ```javascript
 () => {
+  // Reset the done flag for a new annotation session
+  window.__annotationsDone = false;
+
   if (document.getElementById('annotation-overlay')) {
     return 'Annotation overlay already exists';
   }
