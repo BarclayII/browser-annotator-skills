@@ -1,6 +1,6 @@
 ---
 name: annotate-ask
-description: Use this skill if the user asks a question or make a request on specific parts of the current browser page, or if the user indicates that they would like to draw/highlight on the current browser page (using Claude in Chrome).
+description: Enable users to visually point to and annotate elements on a browser page, then answer questions about them. INVOKE THIS SKILL when users ask questions about specific visual UI elements (e.g., "What is this button?", "What does this section do?", "Can you change this element's color?") or when they want to identify/discuss particular page components. This skill lets users draw/circle elements instead of describing them. Always invoke this skill proactively for visual element questions - don't ask users to describe elements or tell them to use annotation tools themselves.
 license: MIT
 compatibility: Designed for Claude Code with Claude in Chrome extension
 metadata:
