@@ -1,6 +1,6 @@
 ---
 name: annotate-ask
-description: Let the user draw/highlight on the current browser page (using Claude in Chrome), then answer their question or perform their requested action based on what they annotated.
+description: Use this skill if the user asks a question or make a request on specific parts of the current browser page, or if the user indicates that they would like to draw/highlight on the current browser page (using Claude in Chrome).
 license: MIT
 compatibility: Designed for Claude Code with Claude in Chrome extension
 metadata:
