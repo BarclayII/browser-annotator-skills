@@ -202,25 +202,15 @@ If it returns `false` or `undefined`, wait 2-3 seconds and check again. Repeat u
 
 You can use the `mcp__claude-in-chrome__computer` tool with `action: "wait"` and `duration: 2` to wait between checks.
 
-## Step 4: Ensure annotations directory exists
-
-Use Bash to create the directory if needed:
-```bash
-mkdir -p ./annotations
-```
-
-## Step 5: Take Screenshot
+## Step 4: Take Screenshot
 
 Use `mcp__claude-in-chrome__computer` with:
 - `action`: "screenshot"
 - `tabId`: (same tabId from earlier)
 
-The screenshot will be saved automatically. Remember the imageId from the response.
+The screenshot will be returned in the tool result and you'll be able to see it immediately.
 
-Then save it to a file using image download or by taking another screenshot and saving to:
-- Filename: `annotations/annotated-{timestamp}.png` (use current timestamp like `20250114-143052`)
-
-## Step 6: Remove the Overlay
+## Step 5: Remove the Overlay
 
 Use `mcp__claude-in-chrome__javascript_tool` to clean up:
 
@@ -232,11 +222,11 @@ Use `mcp__claude-in-chrome__javascript_tool` to clean up:
 })()
 ```
 
-## Step 7: Analyze the Screenshot
+## Step 6: Analyze the Screenshot
 
 Look at the screenshot you just captured (the tool result will show the image). Examine the red annotations the user drew.
 
-## Step 8: Answer the User's Question
+## Step 7: Answer the User's Question
 
 Based on what you see in the annotated screenshot, answer the user's question: **$ARGUMENTS**
 
