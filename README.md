@@ -1,89 +1,90 @@
-# Browser Annotator Skills
+# Browser Annotator
 
-A collection of browser annotation skills for Claude Code that allow users to draw, highlight, and annotate web pages, then ask Claude questions about the annotated content.
+A Claude Code plugin that enables interactive visual communication with web pages through drawing and annotation. Annotate web pages directly in your browser, then ask Claude questions about the highlighted content.
 
 ## Overview
 
-These skills enable interactive visual communication with Claude by allowing you to:
+This plugin enables interactive visual communication with Claude by allowing you to:
 - Draw and highlight directly on web pages
 - Circle or mark specific elements you want to discuss
 - Ask Claude questions about the annotated content
 - Get contextual answers based on what you've highlighted
 
-## Skills Included
+## Features
 
-### 1. annotate-ask (Claude in Chrome)
+### Dual Browser Support
 
-**Description:** Interactive browser annotation for Claude in Chrome extension.
+**annotate-ask** - For Claude in Chrome extension users
+- Interactive annotation overlay on active Chrome tabs
+- Real-time drawing with pen tool
+- Instant screenshot capture with annotations
 
-**Compatibility:** Requires Claude Code with Claude in Chrome extension
+**annotate-ask-playwright** - For Playwright MCP server users
+- Annotation support for automated browser sessions
+- Compatible with browser testing workflows
+- Same annotation interface as Chrome version
 
-**Usage:**
-```
-/annotate-ask What is this button for?
-```
+### Annotation Tools
 
-This skill:
-- Injects an annotation overlay on the current browser tab
-- Provides drawing tools (pen, clear, done buttons)
-- Captures screenshots with your annotations
-- Analyzes the annotated content to answer your questions
-
-### 2. annotate-ask-playwright (Playwright)
-
-**Description:** Interactive browser annotation using Playwright MCP server.
-
-**Compatibility:** Requires Claude Code with Playwright MCP server configured
-
-**Usage:**
-```
-/annotate-ask-playwright How does this form work?
-```
-
-This skill:
-- Works with Playwright-controlled browser sessions
-- Provides the same annotation interface as the Chrome version
-- Supports automated browser testing workflows with visual feedback
+- **Pen Tool**: Draw freehand to highlight areas of interest
+- **Clear Button**: Reset annotations and start over
+- **Done Button**: Capture annotated screenshot for Claude analysis
 
 ## Installation
 
-### Option 1: Install from GitHub
+Install the plugin using Claude Code's plugin manager:
 
-1. Clone this repository or add it to your Claude Code skills directory:
-   ```bash
-   git clone https://github.com/coin2028/browser-annotator-skills.git
-   ```
+```bash
+claude /plugin https://github.com/coin2028/browser-annotator
+```
 
-2. The skills will be automatically available in Claude Code
+This will install the browser annotator plugin and make the `/annotate` and `/annotate-playwright` commands available.
 
-### Option 2: Manual Installation
+### Plugin Structure
 
-1. Copy the `skills/` directory to your `.claude/skills/` folder
-2. Or reference this repository in your Claude Code configuration
+The plugin follows the Claude Code plugin specification:
+- `/.claude-plugin/marketplace.json` - Plugin metadata and configuration
+- `/commands/` - Reusable slash command implementations
+- `/skills/` - Skill definitions that reference the commands
 
 ## Requirements
 
 - **Claude Code CLI** - The official Claude command-line interface
-- **For annotate-ask:** Claude in Chrome browser extension
-- **For annotate-ask-playwright:** Playwright MCP server configured in Claude Code
+- **For /annotate:** Claude in Chrome browser extension installed and active
+- **For /annotate-playwright:** Playwright MCP server configured in Claude Code
 
-## How It Works
+## Usage
 
-1. **Invoke the skill** with your question:
+### Basic Workflow
+
+1. **Navigate to a web page** using Claude in Chrome or Playwright
+
+2. **Invoke the annotation command**:
    ```
-   /annotate-ask What does this section do?
+   /annotate
+   ```
+   or
+   ```
+   /annotate-playwright
    ```
 
-2. **Draw on the page** - An annotation toolbar appears with:
-   - Pen tool (active by default)
-   - Clear button (to reset drawings)
-   - Done button (when finished)
+3. **Annotation interface appears** - A toolbar with three buttons overlays the page:
+   - **Pen** - Draw freehand to highlight areas (active by default)
+   - **Clear** - Erase all annotations and start over
+   - **Done** - Finish annotating and capture screenshot
 
-3. **Annotate freely** - Draw circles, arrows, or highlights around the elements you want to discuss
+4. **Draw on the page** - Click and drag to circle, underline, or mark specific elements
 
-4. **Click Done** - Claude captures the annotated page and analyzes it
+5. **Click Done** - Claude captures the annotated screenshot
 
-5. **Get answers** - Claude responds based on the specific areas you highlighted
+6. **Ask your question** - After the screenshot is captured, ask Claude about the highlighted areas:
+   ```
+   What does this login form do?
+   How does the navigation menu work?
+   Why is this button disabled?
+   ```
+
+7. **Get answers** - Claude analyzes the annotated screenshot and responds based on the visual context
 
 ## Example Use Cases
 
@@ -97,19 +98,28 @@ This skill:
 
 ### Annotation Overlay
 
-The skills inject a lightweight JavaScript overlay that:
+The commands inject a lightweight JavaScript overlay that:
 - Uses HTML5 Canvas for drawing
-- Applies high z-index to appear above page content
+- Applies high z-index (999999+) to appear above page content
 - Captures mouse events for pen drawing
 - Stores annotation paths for redrawing
-- Cleans up after completion
+- Cleans up automatically after completion
 
 ### Screenshot Capture
 
-- Annotations are saved to `./annotations/` directory
-- Filenames use timestamp format: `annotated-YYYYMMDD-HHMMSS.png`
-- Screenshots include both page content and annotations
+- Screenshots are captured directly into Claude Code's context
+- Includes both page content and your red pen annotations
 - Original page remains unmodified
+- Overlay is removed after screenshot capture
+
+### How It Works
+
+1. JavaScript overlay is injected into the active browser tab
+2. User draws annotations using HTML5 Canvas
+3. Click "Done" sets a completion flag
+4. Claude polls for completion, then captures screenshot
+5. Screenshot with annotations is analyzed by Claude
+6. Overlay is removed, page returns to normal
 
 ## License
 
@@ -127,12 +137,13 @@ Quan Gan (coin2028@hotmail.com)
 
 1.0.0
 
-## Related Projects
+## Project Links
 
-- [Anthropic Skills Repository](https://github.com/anthropics/skills)
-- [Claude in Chrome Extension](https://claude.ai/chrome)
-- [Agent Skills Specification](https://agentskills.io/specification)
+- **Repository:** https://github.com/coin2028/browser-annotator
+- **Issues:** https://github.com/coin2028/browser-annotator/issues
+- **Claude in Chrome:** https://claude.ai/chrome
+- **Claude Code:** https://claude.com/code
 
 ---
 
-*Built with the Agent Skills framework for Claude Code*
+*A Claude Code plugin for visual browser interaction*
