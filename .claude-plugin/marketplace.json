@@ -1,0 +1,23 @@
+{
+  "name": "browser-annotator-skills",
+  "owner": {
+    "name": "Quan Gan",
+    "email": "coin2028@hotmail.com"
+  },
+  "metadata": {
+    "description": "Browser annotation and question-answering skills for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "browser-annotator",
+      "description": "Skills for annotating web pages and answering questions about highlighted content",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/annotate-ask",
+        "./skills/annotate-ask-playwright"
+      ]
+    }
+  ]
+}

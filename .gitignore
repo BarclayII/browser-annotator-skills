@@ -1,0 +1,21 @@
+# Annotations directory (user-generated content)
+annotations/
+
+# Claude Code configuration (user-specific)
+.claude/settings.local.json
+
+# Playwright MCP (user-specific)
+.playwright-mcp/
+
+# Node modules (if any dependencies added later)
+node_modules/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.tmp/
